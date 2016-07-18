@@ -69,14 +69,79 @@
     codeBtn.frame = CGRectMake(CGRectGetWidth(self.frame)-40, CGRectGetMinY(headImg.frame), 25, 25);
     [self addSubview:codeBtn];
     
-    UIView *bottomBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bgView.frame) - 10, CGRectGetWidth(self.frame), KIOS_HEIGHT - CGRectGetMaxY(bgView.frame))];
+    UIView *bottomBgView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(bgView.frame) - 10, CGRectGetWidth(self.frame), KIOS_HEIGHT - CGRectGetMaxY(bgView.frame) +10)];
     
     bottomBgView.backgroundColor = [UIColor colorWithRed:11/256.0 green:185.0/256.0 blue:246/256.0 alpha:1];
     [self addSubview:bottomBgView];
     
     
     _titleArr = @[@"我的超级会员",@"QQ钱包",@"个性装扮",@"我的收藏",@"我的相册",@"我的文件",@"我的名片夹"];
-    _imageArr = @[@"",@"",@"",@"",@"",@"",@""];
+//    _imageArr = @[@"",@"",@"",@"",@"",@"",@""];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(bgView.frame)-80, CGRectGetWidth(self.frame)-30, CGRectGetHeight(self.frame))];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.backgroundColor  = [UIColor clearColor];
+    tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self addSubview:tableView];
     
 }
+
+
+
+
+
+
+
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    
+    return _titleArr.count;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 45;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    }
+    
+    cell.textLabel.text = _titleArr[indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    return cell;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end

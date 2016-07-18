@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "JHMainLeftView.h"
-@interface MainViewController ()
+@interface MainViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic,strong)UIScrollView *scrollView;
 @property (nonatomic,strong)JHMainLeftView * leftView;
@@ -30,6 +30,7 @@
     _scrollView.contentSize = CGSizeMake(KIOS_WIDTH+KIOS_WIDTH/4*3, KIOS_HEIGHT);
     _scrollView.bounces = NO;
     _scrollView.pagingEnabled = YES;
+    _scrollView.delegate = self;
     [self.view addSubview:_scrollView];
     
     
@@ -45,6 +46,32 @@
     [_scrollView setContentOffset:CGPointMake(CGRectGetWidth(leftView.frame), 0) animated:NO];
     
 }
+
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    
+    if (scrollView.contentOffset.x<=KIOS_WIDTH *535.0/640.0) {
+        
+        [self.view bringSubviewToFront:_leftView];
+        
+    }
+    
+    
+    
+}
+
+
+//-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    
+//    UITouch *t = [touches anyObject];
+//    CGPoint p = [t locationInView:self.view];
+//    
+//    if (p.x>=KIOS_WIDTH *535.0/640.0) {
+//        [self.view bringSubviewToFront:_scrollView];
+//    }
+//    
+//}
 
 
 - (void)didReceiveMemoryWarning {
