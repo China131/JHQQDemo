@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  JHBaseViewController.h
 //  QQDemo
 //
 //  Created by 简豪 on 16/7/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface JHBaseViewController : UIViewController
 
 @end
-
